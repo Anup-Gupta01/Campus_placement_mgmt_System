@@ -17,6 +17,12 @@ export interface IUser extends Document {
   year?: number;
   dob?: Date;
   gender?: string;
+  cgpa?: number;
+  skills?: string[];
+  projects?: { title: string; description: string; tags: string[]; link?: string }[];
+  resumes?: { name: string; url: string; size: number; date: Date; tags: string[] }[];
+  achievements?: string[];
+  resumeUrl?: string;
 
   // Admin-specific fields
   designation?: string;
@@ -45,6 +51,23 @@ const UserSchema: Schema = new Schema({
   year: Number,
   dob: Date,
   gender: String,
+  cgpa: Number,
+  skills: [String],
+  projects: [{
+    title: String,
+    description: String,
+    tags: [String],
+    link: String
+  }],
+  resumes: [{
+    name: String,
+    url: String,
+    size: Number,
+    date: { type: Date, default: Date.now },
+    tags: [String]
+  }],
+  achievements: [String],
+  resumeUrl: String,
 
   // 🏢 Admin-specific fields
   designation: String,
