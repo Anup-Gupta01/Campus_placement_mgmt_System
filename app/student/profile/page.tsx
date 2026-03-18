@@ -12,7 +12,7 @@ export default function StudentProfile() {
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
       router.push("/login");
       return;
@@ -57,7 +57,7 @@ export default function StudentProfile() {
       const { url } = await res.json();
 
       // 2. Save secure URL back to MongoDB User Database
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const updateRes = await fetch("/api/auth/me", {
         method: "PUT",
         headers: { 

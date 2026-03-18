@@ -86,7 +86,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
       if (!res.ok) throw new Error(data.error || "Verification failed");
       
       // Store Token
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
 
       // Route appropriately
       if (role === "student") router.push("/student/dashboard");
@@ -117,7 +117,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
       }
       
       // Store Token
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
 
       if (role === "student") router.push("/student/dashboard");
       else router.push("/admin/dashboard");

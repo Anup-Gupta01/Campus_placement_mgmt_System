@@ -8,7 +8,7 @@ export default function StudentDashboard() {
   const [firstName, setFirstName] = useState("Student");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (token) {
       fetch("/api/auth/me", {
         headers: { Authorization: `Bearer ${token}` }
