@@ -458,8 +458,22 @@ export default function StudentProfile() {
                       </div>
                     )}
                     <div className="flex gap-2">
-                      <a href={resume.url} target="_blank" rel="noreferrer" className="flex-1 py-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold rounded-lg flex items-center justify-center hover:bg-slate-50">
-                        View/Download
+                      <a
+                        href={`https://docs.google.com/viewer?url=${encodeURIComponent(resume.url)}&embedded=false`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 py-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold rounded-lg flex items-center justify-center hover:bg-slate-50"
+                      >
+                        View
+                      </a>
+                      <a
+                        href={resume.url.replace('/upload/', '/upload/fl_attachment/')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                        className="flex-1 py-1.5 bg-indigo-50 border border-indigo-200 text-indigo-700 text-[12px] font-bold rounded-lg flex items-center justify-center hover:bg-indigo-100"
+                      >
+                        Download
                       </a>
                       <button onClick={() => handleDeleteResume(i)} className="px-3 py-1.5 bg-white border border-red-200 text-red-500 rounded-lg flex items-center justify-center hover:bg-red-50">
                         <Trash2 className="w-4 h-4"/>
