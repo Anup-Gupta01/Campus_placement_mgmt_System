@@ -297,7 +297,7 @@ export default function StudentProfile() {
             
             <div className="flex-1">
               <h2 className="text-3xl sm:text-[34px] font-bold mb-1.5 capitalize">{user?.firstName || "Student"} {user?.lastName || ""}</h2>
-              <p className="text-white/80 font-medium text-base mb-5 capitalize">{user?.branch || "Computer Science Engineering"} {user?.year ? `• ${user.year}th Year` : ""}</p>
+              <p className="text-white/80 font-medium text-base mb-5 capitalize">{user?.branch || "Computer Science Engineering"} {user?.year ? `• ${user.year}${[,"st","nd","rd"][user.year] || "th"} Year` : ""}</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8 text-sm text-white/90">
                 <div className="flex items-center"><Mail className="w-4 h-4 mr-2.5 opacity-70"/> {user?.email || "No email"}</div>
