@@ -27,16 +27,13 @@ export default function Navbar() {
       .then(data => {
         if (data.user) {
           setUser(data.user);
-          if (pathname === "/") {
-            router.push(data.user.role === 'admin' ? "/admin/dashboard" : "/student/dashboard");
-          }
         }
         setLoading(false);
       })
       .catch(() => {
         setLoading(false);
       });
-  }, [pathname]); // Re-runs naturally when routes natively change
+  }, []); // Run only once on mount
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
