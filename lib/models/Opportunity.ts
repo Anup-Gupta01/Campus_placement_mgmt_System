@@ -14,6 +14,7 @@ const opportunitySchema = new mongoose.Schema({
   applicationDeadline: { type: Date, required: true },
   onlineAssessmentDate: { type: Date },
   interviewDate: { type: Date },
+  status: { type: String, enum: ['Open', 'Closed'], default: 'Open' },
   createdAt: { type: Date, default: Date.now },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // Admin who posted it
 });
