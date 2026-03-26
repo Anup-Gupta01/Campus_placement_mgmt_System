@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   Upload, FileText, Loader2, Star, Target, AlertCircle,
   CheckCircle, Lightbulb, Tag, Download, RotateCcw, Sparkles,
-  TrendingUp, Award, ShieldCheck, ArrowLeft, Cpu, Zap
+  TrendingUp, Award, ShieldCheck, ArrowLeft, Cpu, Zap, Info
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,6 +28,7 @@ type Analysis = {
   improvements: string[];
   missingKeywords: string[];
   bestFitRoles: BestFitRole[];
+  _fallback?: boolean;
 };
 
 const SECTION_LABELS: Record<keyof SectionScores, string> = {
@@ -284,6 +285,20 @@ export default function ResumeAnalyzer() {
           /* ════ RESULTS ════ */
           <div className="space-y-5">
 
+            {/* Fallback banner */}
+            {analysis._fallback && (
+              <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-4">
+                <Info className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-[13px] font-bold text-amber-800">Keyword-based Analysis Mode</p>
+                  <p className="text-[12px] text-amber-700 mt-0.5">
+                    The Gemini AI quota is currently exceeded. Your resume was evaluated using our built-in keyword scorer.
+                    Results are still useful but may be less nuanced than full AI analysis. Try again later for AI-powered insights.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Score Header */}
             <div className="bg-white rounded-[24px] border border-slate-200 shadow-sm p-6 sm:p-8">
               <div className="flex flex-col sm:flex-row items-center gap-8">
@@ -291,7 +306,9 @@ export default function ResumeAnalyzer() {
                 <div className="flex-1 text-center sm:text-left">
                   <h2 className="text-[22px] font-extrabold text-slate-900 mb-1">Analysis Complete!</h2>
                   <p className="text-[13px] text-slate-500 font-medium mb-5">
-                    Based on AI review against industry standards and ATS criteria.
+                    {analysis._fallback
+                      ? "Based on keyword analysis against industry standards and ATS criteria."
+                      : "Based on AI review against industry standards and ATS criteria."}
                   </p>
                   <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
                     <button onClick={handleReset}
