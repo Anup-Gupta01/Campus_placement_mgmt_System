@@ -245,7 +245,11 @@ export default function StudentProfile() {
         projects: data.projects?.length > 0 ? data.projects : prev.projects
       }));
 
-      alert("Extracted data from PDF securely! Review and save changes.");
+      if (data._fallback) {
+        alert("✅ Data extracted using keyword analysis (AI quota exceeded).\nSome fields may be partial — please review and fill in any missing details manually.");
+      } else {
+        alert("✅ AI successfully extracted data from your resume! Review and save changes.");
+      }
     } catch (err: any) {
       alert(err.message);
     } finally {
