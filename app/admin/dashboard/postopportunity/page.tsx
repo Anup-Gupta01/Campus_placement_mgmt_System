@@ -38,9 +38,13 @@ export default function PostOpportunity() {
     if (selectedBranches.length === 0) { alert("Please select at least one eligible branch."); return; }
     setLoading(true);
     try {
+      const token = sessionStorage.getItem("token") || "";
       const res = await fetch("/api/admin/opportunities", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ ...formData, eligibleBranches: selectedBranches }),
       });
       if (!res.ok) {

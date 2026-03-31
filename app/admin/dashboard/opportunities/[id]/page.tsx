@@ -32,14 +32,20 @@ export default function ManageApplications() {
   const [updating, setUpdating]   = useState<string | null>(null);
 
   const fetchOpp = useCallback(async () => {
-    const res = await fetch(`/api/admin/opportunities/${oppId}`);
+    const token = sessionStorage.getItem("token") || "";
+    const res = await fetch(`/api/admin/opportunities/${oppId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const d   = await res.json();
     setOpp(d.opportunity);
     setStats(d.stats || {});
   }, [oppId]);
 
   const fetchApplicants = useCallback(async () => {
-    const res = await fetch(`/api/admin/opportunities/${oppId}/applicants?status=${statusFilter}`);
+    const token = sessionStorage.getItem("token") || "";
+    const res = await fetch(`/api/admin/opportunities/${oppId}/applicants?status=${statusFilter}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const d   = await res.json();
     setApplicants(d.applicants || []);
     setLoading(false);
@@ -53,9 +59,10 @@ export default function ManageApplications() {
 
   const updateStatus = async (appId: string, newStatus: string) => {
     setUpdating(appId);
+    const token = sessionStorage.getItem("token") || "";
     await fetch(`/api/admin/applications/${appId}/status`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ status: newStatus }),
     });
     setApplicants(prev => prev.map(a => a._id === appId ? { ...a, status: newStatus } : a));

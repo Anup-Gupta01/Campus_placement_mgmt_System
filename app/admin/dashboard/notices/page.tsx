@@ -15,7 +15,10 @@ export default function NoticesPage() {
   const [file, setFile] = useState<File | null>(null);
 
   const fetchNotices = async () => {
-    const res = await fetch("/api/admin/notices");
+    const token = sessionStorage.getItem("token") || "";
+    const res = await fetch("/api/admin/notices", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const d   = await res.json();
     setNotices(d.notices || []);
     setLoading(false);
@@ -32,7 +35,12 @@ export default function NoticesPage() {
       fd.append("title", form.title);
       fd.append("description", form.description);
       fd.append("pdf", file);
-      const res = await fetch("/api/admin/notices", { method: "POST", body: fd });
+      const token = sessionStorage.getItem("token") || "";
+      const res = await fetch("/api/admin/notices", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: fd,
+      });
       if (!res.ok) { const err = await res.json(); throw new Error(err.error); }
       setSuccessMsg("Notice posted successfully!");
       setForm({ title: "", description: "" });

@@ -9,6 +9,7 @@ export interface IUser extends Document {
   password?: string;
   role: "student" | "admin";
   university: string;
+  universityCode?: string;
   location?: string;
   
   // Student-specific fields
@@ -43,6 +44,7 @@ const UserSchema: Schema = new Schema({
   password: { type: String, required: true },
   role: { type: String, enum: ["student", "admin"], default: "student" },
   university: { type: String, required: true },
+  universityCode: { type: String, trim: true, uppercase: true, default: "LEGACY" },
   location: String,
   
   // 🎓 Student-specific fields

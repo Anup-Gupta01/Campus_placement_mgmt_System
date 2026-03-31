@@ -23,7 +23,7 @@ function getProgress(status: string): number {
     "OA Pending": 42,
     Interview: 57,
     Selected: 100,
-    Rejected: 25, // show how far they got
+    Rejected: 25,
   };
   return map[status] ?? 14;
 }
@@ -53,9 +53,19 @@ export async function POST(
     }
 
     // Check opportunity exists
-    const opportunity = await Opportunity.findById(jobId);
+    const opportunity = await Opportunity.findById(jobId) as any;
     if (!opportunity) {
       return NextResponse.json({ error: "Opportunity not found" }, { status: 404 });
+    }
+
+    // ✅ Ensure student can only apply to opportunities from their own university
+    const studentUniversityCode = decoded.universityCode || "LEGACY";
+    const oppUniversityCode = opportunity.universityCode || "LEGACY";
+    if (studentUniversityCode !== oppUniversityCode) {
+      return NextResponse.json(
+        { error: "You can only apply to opportunities from your own university." },
+        { status: 403 }
+      );
     }
 
     // Build default timeline
@@ -72,6 +82,7 @@ export async function POST(
       status: "Applied",
       progress: getProgress("Applied"),
       timeline,
+      universityCode: studentUniversityCode, // ✅ stamp universityCode on the application
     });
 
     return NextResponse.json({ message: "Application submitted!", application }, { status: 201 });

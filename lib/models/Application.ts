@@ -20,6 +20,7 @@ const applicationSchema = new mongoose.Schema({
   timeline: [timelineStepSchema],
   resumeUrl: { type: String },
   offerLetterUrl: { type: String },
+  universityCode: { type: String, trim: true, uppercase: true, default: "LEGACY" },
   appliedOn: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 }, { timestamps: true });

@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 import connectToDatabase from "@/lib/mongodb";
 import Notice from "@/lib/models/Notice";
 import { v2 as cloudinary } from "cloudinary";
+
+const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,8 +12,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+function getAdminFromToken(req: Request) {
+  const authHeader = req.headers.get("authorization");
+  if (!authHeader?.startsWith("Bearer ")) return null;
+  try {
+    const token = authHeader.split(" ")[1];
+    return jwt.verify(token, JWT_SECRET) as any;
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(req: Request) {
   try {
+    const decoded = getAdminFromToken(req);
+    if (!decoded || decoded.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized. Admin access required." }, { status: 401 });
+    }
+
     await connectToDatabase();
     const formData = await req.formData();
     const title = formData.get("title") as string;
@@ -36,11 +55,16 @@ export async function POST(req: Request) {
       uploadStream.end(buffer);
     });
 
+    // ✅ Attach admin's universityCode from JWT
+    const universityCode = decoded.universityCode || "LEGACY";
+
     const notice = new Notice({
       title,
       description,
       pdfUrl: uploadResult.secure_url,
       publicId: uploadResult.public_id,
+      postedBy: decoded.id,
+      universityCode, // enforce from JWT
     });
 
     await notice.save();
@@ -51,10 +75,18 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const decoded = getAdminFromToken(req);
+    if (!decoded || decoded.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized. Admin access required." }, { status: 401 });
+    }
+
     await connectToDatabase();
-    const notices = await Notice.find({}).sort({ createdAt: -1 });
+
+    // ✅ Filter notices by admin's universityCode
+    const universityCode = decoded.universityCode || "LEGACY";
+    const notices = await Notice.find({ universityCode }).sort({ createdAt: -1 });
     return NextResponse.json({ notices });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

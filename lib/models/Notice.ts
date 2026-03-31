@@ -6,6 +6,7 @@ const noticeSchema = new mongoose.Schema({
   pdfUrl: { type: String, required: true },
   publicId: { type: String }, // Cloudinary public_id for deletion
   postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  universityCode: { type: String, trim: true, uppercase: true, default: "LEGACY" },
   createdAt: { type: Date, default: Date.now },
 });
 

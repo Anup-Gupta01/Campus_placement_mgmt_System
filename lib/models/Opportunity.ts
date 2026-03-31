@@ -16,7 +16,8 @@ const opportunitySchema = new mongoose.Schema({
   interviewDate: { type: Date },
   status: { type: String, enum: ['Open', 'Closed'], default: 'Open' },
   createdAt: { type: Date, default: Date.now },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // Admin who posted it
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Admin who posted it
+  universityCode: { type: String, trim: true, uppercase: true, default: "LEGACY" },
 });
 
 export default mongoose.models.Opportunity || mongoose.model("Opportunity", opportunitySchema);

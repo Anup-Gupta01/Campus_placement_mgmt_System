@@ -1,14 +1,30 @@
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 import connectToDatabase from "@/lib/mongodb";
 import Application from "@/lib/models/Application";
 import Opportunity from "@/lib/models/Opportunity";
 
-export async function GET() {
+const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
+
+export async function GET(req: Request) {
   try {
+    // ✅ Require admin JWT
+    const authHeader = req.headers.get("authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return NextResponse.json({ error: "Unauthorized. Admin access required." }, { status: 401 });
+    }
+    const token = authHeader.split(" ")[1];
+    const decoded: any = jwt.verify(token, JWT_SECRET);
+    if (decoded.role !== "admin") {
+      return NextResponse.json({ error: "Forbidden. Admins only." }, { status: 403 });
+    }
+
     await connectToDatabase();
 
-    // Get all applications with student and opportunity data
-    const applications = await Application.find({})
+    // ✅ Only export data from admin's own university
+    const universityCode = decoded.universityCode || "LEGACY";
+
+    const applications = await Application.find({ universityCode })
       .populate("student", "firstName lastName email branch cgpa")
       .populate("opportunity", "companyName role package")
       .sort({ appliedOn: -1 })
@@ -41,7 +57,7 @@ export async function GET() {
     return new NextResponse(csv, {
       headers: {
         "Content-Type": "text/csv",
-        "Content-Disposition": `attachment; filename="placement_report_${new Date().toISOString().split("T")[0]}.csv"`,
+        "Content-Disposition": `attachment; filename="placement_report_${universityCode}_${new Date().toISOString().split("T")[0]}.csv"`,
       },
     });
   } catch (error: any) {

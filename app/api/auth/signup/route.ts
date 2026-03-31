@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectToDatabase from "@/lib/mongodb";
 import User from "@/lib/models/User";
+import University from "@/lib/models/University";
 import nodemailer from "nodemailer";
 import twilio from "twilio";
 
+// Original allowedAdmins whitelist — kept for backward compatibility
 const allowedAdmins = [
   "tnp@abcuniversity.edu",
   "placement@xyzcollege.edu"
@@ -38,7 +40,7 @@ async function sendEmailOTP(email: string, otp: number, name: string) {
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST || "smtp.gmail.com",
         port: Number(process.env.SMTP_PORT) || 587,
-        secure: false, // true for 465, false for other ports
+        secure: false,
         auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS
@@ -55,7 +57,6 @@ async function sendEmailOTP(email: string, otp: number, name: string) {
       console.error("[ERROR] Failed to send Email OTP:", err);
     }
   } else {
-    // Dev Fallback
     console.log(`\n=========================================\n[DEV MODE] NO VALID SMTP CREDS. OTP for EMAIL ${email} is: ${otp}\n=========================================\n`);
   }
 }
@@ -65,10 +66,7 @@ async function sendMobileOTP(mobileNo: string, otp: number) {
   if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN && process.env.TWILIO_ACCOUNT_SID !== "your_account_sid") {
     try {
       const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-      
-      // Ensure mobileNo has a country code, e.g. assumes +91 if none provided for India
       const formattedMobile = mobileNo.startsWith("+") ? mobileNo : `+91${mobileNo}`;
-      
       await client.messages.create({
         body: `Your PlacementPro verification code is: ${otp}. Valid for 10 minutes.`,
         from: process.env.TWILIO_PHONE_NUMBER,
@@ -79,8 +77,7 @@ async function sendMobileOTP(mobileNo: string, otp: number) {
       console.error("[ERROR] Failed to send SMS OTP:", err);
     }
   } else {
-     // Dev Fallback
-     console.log(`\n=========================================\n[DEV MODE] NO VALID TWILIO CREDS. OTP for MOBILE ${mobileNo} is: ${otp}\n=========================================\n`);
+    console.log(`\n=========================================\n[DEV MODE] NO VALID TWILIO CREDS. OTP for MOBILE ${mobileNo} is: ${otp}\n=========================================\n`);
   }
 }
 
@@ -89,7 +86,20 @@ export async function POST(req: Request) {
     await connectToDatabase();
     
     const body = await req.json();
-    const { firstName, lastName, email, password, mobileNo, university, course, branch, year, dob, gender, verifyVia, designation, jobId } = body;
+    const { firstName, lastName, email, password, mobileNo, universityCode, university, course, branch, year, dob, gender, verifyVia, designation, jobId } = body;
+
+    // ✅ Validate universityCode is provided
+    if (!universityCode || universityCode.trim() === "") {
+      return NextResponse.json({ error: "University Code is required" }, { status: 400 });
+    }
+
+    const normalizedCode = universityCode.trim().toUpperCase();
+
+    // ✅ Validate universityCode exists in our system
+    const univRecord = await University.findOne({ universityCode: normalizedCode, isActive: true });
+    if (!univRecord) {
+      return NextResponse.json({ error: "Invalid or unrecognized University Code. Please contact your TnP office." }, { status: 400 });
+    }
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -97,21 +107,23 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User with this email already exists" }, { status: 400 });
     }
 
-    // Default role
+    // ✅ Original allowedAdmins logic preserved — grants admin role to whitelisted emails
     let role = "student";
     if (allowedAdmins.includes(email)) {
       role = "admin";
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const otp = Math.floor(100000 + Math.random() * 900000); // 6 digit OTP
-    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 mins expiry
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
     const user = new User({
       firstName, lastName, email, mobileNo,
       password: hashedPassword,
       role,
-      university, course, branch, year, dob, gender, designation, jobId,
+      university: university || univRecord.name,
+      universityCode: normalizedCode, // ✅ Saved from validated University record
+      course, branch, year, dob, gender, designation, jobId,
       otp: otp.toString(),
       otpExpiry,
       isVerified: false

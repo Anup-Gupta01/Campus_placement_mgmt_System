@@ -36,14 +36,20 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/admin/dashboard")
+    const token = sessionStorage.getItem("token") || "";
+    fetch("/api/admin/dashboard", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then(r => r.json())
       .then(d => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);
 
   const handleExport = async () => {
-    const res = await fetch("/api/admin/export-report");
+    const token = sessionStorage.getItem("token") || "";
+    const res = await fetch("/api/admin/export-report", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");

@@ -24,6 +24,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
 
   // Step 2: Academic Info
   const [university, setUniversity] = useState("");
+  const [universityCode, setUniversityCode] = useState("");
   const [course, setCourse] = useState("");
   const [branch, setBranch] = useState("");
   const [year, setYear] = useState("");
@@ -53,6 +54,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           firstName, lastName, email, password, mobileNo, 
+          universityCode,
           university, course, branch, year: Number(year), dob, gender,
           designation, jobId,
           verifyVia 
@@ -311,6 +313,15 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
               {/* === SIGNUP STEP 2 === */}
               {mode === "signup" && signupStep === 2 && (
                 <>
+                  <div>
+                    <label className="block text-[13px] font-bold text-slate-700 mb-1.5">University Code</label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><KeyRound className="h-[18px] w-[18px]" /></div>
+                      <input type="text" value={universityCode} onChange={e => setUniversityCode(e.target.value.toUpperCase())} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white uppercase tracking-widest" placeholder="e.g. IITB" maxLength={10} />
+                    </div>
+                    <p className="text-[11px] text-slate-400 mt-1">Enter the code provided by your TnP office</p>
+                  </div>
+
                   <div>
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">University / College</label>
                     <div className="relative">

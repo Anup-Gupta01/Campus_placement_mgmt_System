@@ -36,7 +36,10 @@ export default function AllOpportunities() {
 
   const fetchData = (statusFilter: string) => {
     setLoading(true);
-    fetch(`/api/admin/opportunities?status=${statusFilter}`)
+    const token = sessionStorage.getItem("token") || "";
+    fetch(`/api/admin/opportunities?status=${statusFilter}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then(r => r.json())
       .then(d => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));
@@ -46,9 +49,10 @@ export default function AllOpportunities() {
 
   const handleStatusToggle = async (oppId: string, currentStatus: string) => {
     const newStatus = currentStatus === "Open" ? "Closed" : "Open";
+    const token = sessionStorage.getItem("token") || "";
     await fetch(`/api/admin/opportunities/${oppId}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ status: newStatus }),
     });
     fetchData(filter);
