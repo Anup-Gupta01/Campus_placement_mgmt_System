@@ -19,7 +19,10 @@ export async function GET(req: Request) {
 
     await connectToDatabase();
 
-    let query: any = { student: decoded.id };
+    let query: any = { 
+      student: decoded.id, 
+      universityCode: decoded.universityCode || "LEGACY" 
+    };
 
     if (filter === "active") {
       query.status = { $in: ["Applied", "Shortlisted", "OA Pending", "Interview"] };
