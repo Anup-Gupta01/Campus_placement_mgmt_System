@@ -57,7 +57,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
           universityCode,
           university, course, branch, year: Number(year), dob, gender,
           designation, jobId,
-          verifyVia 
+          verifyVia, role
         })
       });
       const data = await res.json();

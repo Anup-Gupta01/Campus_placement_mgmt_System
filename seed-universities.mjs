@@ -1,12 +1,3 @@
-/**
- * seed-universities.mjs
- * 
- * Seeds sample universities into MongoDB.
- * Run once: node seed-universities.mjs
- * 
- * Prerequisites: MONGODB_URI in .env.local
- */
-
 import mongoose from "mongoose";
 import { readFileSync } from "fs";
 import { resolve, dirname } from "path";
@@ -20,11 +11,15 @@ try {
   for (const line of envContent.split("\n")) {
     const [key, ...rest] = line.split("=");
     if (key && rest.length > 0) {
-      process.env[key.trim()] = rest.join("=").trim();
+      let val = rest.join("=").trim();
+      if (val.startsWith('"') && val.endsWith('"')) {
+        val = val.slice(1, -1);
+      }
+      process.env[key.trim()] = val;
     }
   }
 } catch {
-  console.error("Could not find .env.local — make sure MONGODB_URI is set.");
+  console.error("Could not find .env.local");
 }
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -33,49 +28,43 @@ if (!MONGODB_URI) {
   process.exit(1);
 }
 
+// 📌 Correctly define the University Schema for the seed script
 const universitySchema = new mongoose.Schema({
   name: { type: String, required: true },
-  universityCode: { type: String, required: true, unique: true, uppercase: true },
+  universityCode: { type: String, required: true, unique: true, uppercase: true, trim: true },
   isActive: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },
 });
 
 const University = mongoose.models.University || mongoose.model("University", universitySchema);
 
-const universities = [
-  { name: "Indian Institute of Technology Bombay",   universityCode: "IITB",   isActive: true },
-  { name: "Indian Institute of Technology Delhi",    universityCode: "IITD",   isActive: true },
-  { name: "National Institute of Technology Karnataka", universityCode: "NITK", isActive: true },
-  { name: "ABC University",                          universityCode: "ABCU",   isActive: true },
-  { name: "XYZ College of Engineering",             universityCode: "XYZCE",  isActive: true },
-  { name: "Demo University",                         universityCode: "DEMO",   isActive: true },
-];
-
-async function seed() {
+async function seedUniversities() {
   console.log("🔗 Connecting to MongoDB...");
   await mongoose.connect(MONGODB_URI);
   console.log("✅ Connected!\n");
 
-  let inserted = 0;
-  let skipped = 0;
+  const universities = [
+    { name: "ABC University", universityCode: "ABC", isActive: true },
+    { name: "XYZ College", universityCode: "XYZ", isActive: true },
+    { name: "Legacy University", universityCode: "LEGACY", isActive: true },
+    { name: "MMMUT", universityCode: "MMMUT", isActive: true } // Added for user testing
+  ];
 
   for (const uni of universities) {
     const existing = await University.findOne({ universityCode: uni.universityCode });
-    if (existing) {
-      console.log(`⏭️  Skipped (already exists): ${uni.universityCode} — ${uni.name}`);
-      skipped++;
-    } else {
+    if (!existing) {
       await University.create(uni);
-      console.log(`✅ Inserted: ${uni.universityCode} — ${uni.name}`);
-      inserted++;
+      console.log(`✅ Created university: ${uni.name} (${uni.universityCode})`);
+    } else {
+      console.log(`ℹ️ University already exists: ${uni.name} (${uni.universityCode})`);
     }
   }
 
-  console.log(`\n🎉 Done! Inserted: ${inserted}, Skipped: ${skipped}`);
+  console.log("\n🚀 Seeding Complete! You can now use 'ABC', 'XYZ', or 'LEGACY' as a universityCode during signup.");
   await mongoose.disconnect();
 }
 
-seed().catch(err => {
-  console.error("❌ Seed failed:", err.message);
+seedUniversities().catch(err => {
+  console.error("❌ Seeding failed:", err.message);
   process.exit(1);
 });

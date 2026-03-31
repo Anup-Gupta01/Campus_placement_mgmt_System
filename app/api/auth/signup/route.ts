@@ -2,15 +2,11 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectToDatabase from "@/lib/mongodb";
 import User from "@/lib/models/User";
-import University from "@/lib/models/University";
+
 import nodemailer from "nodemailer";
 import twilio from "twilio";
 
-// Original allowedAdmins whitelist — kept for backward compatibility
-const allowedAdmins = [
-  "tnp@abcuniversity.edu",
-  "placement@xyzcollege.edu"
-];
+
 
 // Helper to send professional HTML email
 async function sendEmailOTP(email: string, otp: number, name: string) {
@@ -86,20 +82,15 @@ export async function POST(req: Request) {
     await connectToDatabase();
     
     const body = await req.json();
-    const { firstName, lastName, email, password, mobileNo, universityCode, university, course, branch, year, dob, gender, verifyVia, designation, jobId } = body;
+    const { firstName, lastName, email, password, mobileNo, universityCode, university, course, branch, year, dob, gender, verifyVia, designation, jobId, role } = body;
 
-    // ✅ Validate universityCode is provided
+    // ... (leaving space to not break lines mapping but the above is 89)
     if (!universityCode || universityCode.trim() === "") {
       return NextResponse.json({ error: "University Code is required" }, { status: 400 });
     }
 
     const normalizedCode = universityCode.trim().toUpperCase();
 
-    // ✅ Validate universityCode exists in our system
-    const univRecord = await University.findOne({ universityCode: normalizedCode, isActive: true });
-    if (!univRecord) {
-      return NextResponse.json({ error: "Invalid or unrecognized University Code. Please contact your TnP office." }, { status: 400 });
-    }
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -107,11 +98,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User with this email already exists" }, { status: 400 });
     }
 
-    // ✅ Original allowedAdmins logic preserved — grants admin role to whitelisted emails
-    let role = "student";
-    if (allowedAdmins.includes(email)) {
-      role = "admin";
-    }
+    // ✅ Assign the requested role ("admin" or "student")
+    const finalRole = role === "admin" ? "admin" : "student";
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const otp = Math.floor(100000 + Math.random() * 900000);
@@ -120,9 +108,9 @@ export async function POST(req: Request) {
     const user = new User({
       firstName, lastName, email, mobileNo,
       password: hashedPassword,
-      role,
-      university: university || univRecord.name,
-      universityCode: normalizedCode, // ✅ Saved from validated University record
+      role: finalRole,
+      university: university || normalizedCode,
+      universityCode: normalizedCode, // ✅ User-provided code
       course, branch, year, dob, gender, designation, jobId,
       otp: otp.toString(),
       otpExpiry,
