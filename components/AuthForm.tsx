@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { GraduationCap, Building2, Mail, Lock, User as UserIcon, Phone, School, BookOpen, KeyRound, ArrowRight, Smartphone } from "lucide-react";
 
 type Role = "student" | "admin";
-type Mode = "login" | "signup";
+type Mode = "login" | "signup" | "forgot-password";
 type SignupStep = 1 | 2 | "otp";
 type VerifyMethod = "email" | "mobile";
 
@@ -130,6 +130,31 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
     }
   };
 
+  const handleForgotPasswordSubmit = async () => {
+    if (!email) {
+      setErrorMsg("Please enter your email address.");
+      return;
+    }
+    setErrorMsg("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.error || "Failed to send OTP");
+      
+      router.push(`/reset-password?email=${encodeURIComponent(email)}`);
+    } catch (err: any) {
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex-1 flex items-center justify-center p-6 bg-[#F8FAFC]">
       <div className="w-full max-w-[1200px] bg-white rounded-[32px] shadow-2xl shadow-indigo-100/50 overflow-hidden flex flex-col lg:flex-row border border-slate-100">
@@ -160,7 +185,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
           <div className="w-full max-w-[460px] mx-auto min-h-[500px] flex flex-col justify-center">
             
             {/* Context/Mode Switcher - Hidden in OTP state */}
-            {mode === "login" || (mode === "signup" && signupStep !== "otp") ? (
+            {mode === "login" || (mode === "signup" && signupStep !== "otp") || mode === "forgot-password" ? (
               <>
                 {/* Role Toggle */}
                 <div className="grid grid-cols-2 gap-4 mb-8">
@@ -252,11 +277,36 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                       <input type="checkbox" className="w-4 h-4 rounded-[4px] border-slate-300 text-blue-600 bg-white focus:ring-blue-600" />
                       <span className="text-[14px] font-semibold text-slate-600">Remember me</span>
                     </label>
-                    <a href="#" className="text-[14px] font-bold text-blue-600 hover:text-blue-700 transition-colors">Forgot password?</a>
+                    <button type="button" onClick={() => { setMode("forgot-password"); setErrorMsg(""); }} className="text-[14px] font-bold text-blue-600 hover:text-blue-700 transition-colors">Forgot password?</button>
                   </div>
                   <button onClick={handleLoginSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
                     {loading ? "Please wait..." : `Sign In as ${role === "student" ? "Student" : "Admin"}`}
                   </button>
+                </>
+              )}
+
+              {/* === FORGOT PASSWORD VIEW === */}
+              {mode === "forgot-password" && (
+                <>
+                  <div className="mb-6">
+                    <h3 className="text-[22px] font-extrabold text-slate-900 mb-2">Forgot Password?</h3>
+                    <p className="text-sm font-medium text-slate-500">Enter your email address and we'll send you an OTP to reset your password.</p>
+                  </div>
+                  <div>
+                    <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Email</label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Mail className="h-[18px] w-[18px]" /></div>
+                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="youremail@university.edu" />
+                    </div>
+                  </div>
+                  <button onClick={handleForgotPasswordSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
+                    {loading ? "Sending OTP..." : "Send OTP"}
+                  </button>
+                  <div className="text-center mt-4">
+                    <button type="button" onClick={() => { setMode("login"); setErrorMsg(""); }} className="text-[14px] font-bold text-slate-500 hover:text-slate-700 transition-colors">
+                      Back to Login
+                    </button>
+                  </div>
                 </>
               )}
 
