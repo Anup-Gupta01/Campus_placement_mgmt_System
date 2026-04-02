@@ -7,8 +7,9 @@ const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { applicationId: string } }
+  props: { params: Promise<{ applicationId: string }> }
 ) {
+  const params = await props.params;
   try {
     // ✅ Require admin JWT
     const authHeader = req.headers.get("authorization");
