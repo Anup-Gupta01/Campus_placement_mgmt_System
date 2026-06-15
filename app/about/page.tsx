@@ -1,4 +1,4 @@
-export default function About() {
+﻿export default function About() {
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col items-center justify-center p-6 pb-32">
       <h1 className="text-[48px] font-extrabold mb-6 tracking-tight text-slate-900">About PlacementPro</h1>

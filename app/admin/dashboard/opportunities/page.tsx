@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -16,9 +16,9 @@ function StatusBadge({ status }: { status: string }) {
 
 function TypeBadge({ type }: { type: string }) {
   const map: Record<string, string> = {
-    "Full-time": "text-blue-700 bg-blue-50 border border-blue-200",
+    "Full-time": "text-emerald-700 bg-emerald-50 border border-emerald-200",
     "Internship": "text-orange-700 bg-orange-50 border border-orange-200",
-    "Contract":   "text-purple-700 bg-purple-50 border border-purple-200",
+    "Contract":   "text-amber-700  bg-amber-50  border border-amber-200",
   };
   return (
     <span className={`text-[11px] font-bold px-2.5 py-1 rounded-lg ${map[type] || "text-slate-600 bg-slate-100"}`}>
@@ -74,7 +74,7 @@ export default function AllOpportunities() {
             <p className="text-slate-500 font-medium mt-1 text-[15px]">Manage all job and internship postings</p>
           </div>
           <Link href="/admin/dashboard/postopportunity"
-            className="px-5 py-2.5 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-bold rounded-xl shadow-[0_4px_14px_0_rgb(139,92,246,0.39)] flex items-center transition-all active:scale-[0.98] self-start sm:self-auto">
+            className="px-5 py-2.5 bg-[#1F2937] hover:bg-[#111827] text-white text-sm font-bold rounded-xl shadow-sm flex items-center transition-all active:scale-[0.98] self-start sm:self-auto">
             <Plus className="w-4 h-4 mr-2" /> Post New Opportunity
           </Link>
         </div>
@@ -85,7 +85,7 @@ export default function AllOpportunities() {
             { label: "Total Opportunities", value: summary.total        || 0, color: "text-slate-900" },
             { label: "Active",              value: summary.active       || 0, color: "text-emerald-600" },
             { label: "Closed",              value: summary.closed       || 0, color: "text-slate-500" },
-            { label: "Total Applicants",    value: summary.totalApplicants || 0, color: "text-violet-600" },
+            { label: "Total Applicants",    value: summary.totalApplicants || 0, color: "text-emerald-600" },
           ].map((card, i) => (
             <div key={i} className="bg-white rounded-[20px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 text-center">
               <p className={`text-3xl font-extrabold ${card.color}`}>{card.value.toLocaleString()}</p>
@@ -100,13 +100,13 @@ export default function AllOpportunities() {
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Search by company or role..."
-              className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-[14px] font-medium focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all shadow-sm" />
+              className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-[14px] font-medium focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all shadow-sm" />
           </div>
           <div className="flex gap-2 bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
             {["All", "Open", "Closed"].map(f => (
               <button key={f} onClick={() => setFilter(f)}
                 className={`px-5 py-2 text-[13px] font-bold rounded-lg transition-all ${
-                  filter === f ? "bg-[#8B5CF6] text-white shadow-md" : "text-slate-600 hover:bg-slate-100"
+                  filter === f ? "bg-[#1F2937] text-white shadow-sm" : "text-slate-600 hover:bg-slate-100"
                 }`}>
                 {f}
               </button>
@@ -124,7 +124,7 @@ export default function AllOpportunities() {
           </div>
           {loading ? (
             <div className="py-20 flex items-center justify-center">
-              <div className="w-8 h-8 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+              <div className="w-8 h-8 border-4 border-emerald-200 border-t-[#059669] rounded-full animate-spin" />
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -139,19 +139,19 @@ export default function AllOpportunities() {
                 <tbody className="divide-y divide-slate-100">
                   {filtered.length === 0 && (
                     <tr><td colSpan={8} className="px-7 py-16 text-center text-slate-400 font-medium">
-                      No opportunities found. <Link href="/admin/dashboard/postopportunity" className="text-purple-600 font-bold">Post one!</Link>
+                      No opportunities found. <Link href="/admin/dashboard/postopportunity" className="text-emerald-600 font-bold">Post one!</Link>
                     </td></tr>
                   )}
                   {filtered.map((opp: any) => (
                     <tr key={opp._id} className="hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-extrabold text-[14px] flex-shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-[#111827] flex items-center justify-center text-white font-extrabold text-[14px] flex-shrink-0">
                             {opp.companyName?.charAt(0)}
                           </div>
                           <div>
                             <p className="text-[14px] font-extrabold text-slate-900">{opp.companyName}</p>
-                            <p className="text-[12px] font-semibold text-purple-600">{opp.role}</p>
+                            <p className="text-[12px] font-semibold text-emerald-600">{opp.role}</p>
                           </div>
                         </div>
                       </td>

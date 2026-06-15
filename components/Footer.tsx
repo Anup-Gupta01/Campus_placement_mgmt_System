@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { GraduationCap, Linkedin, Instagram } from "lucide-react";
 
 export default function Footer() {
@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Brand Col */}
         <div className="md:col-span-5 pr-8">
           <div className="flex items-center space-x-2 mb-6">
-            <GraduationCap className="h-8 w-8 text-indigo-500" strokeWidth={2.5} />
+            <GraduationCap className="h-8 w-8 text-emerald-500" strokeWidth={2.5} />
             <span className="text-2xl font-bold tracking-tight text-white">PlacementPro</span>
           </div>
           <p className="text-slate-400 text-[15px] leading-relaxed max-w-sm mb-8">

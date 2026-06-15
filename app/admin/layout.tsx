@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import AdminNavbar from "@/components/AdminNavbar";
 import Footer from "@/components/Footer";

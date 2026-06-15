@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Building2, Briefcase, MapPin, Link as LinkIcon, GraduationCap, Calendar } from "lucide-react";
 import { useState } from "react";
@@ -71,7 +71,7 @@ export default function PostOpportunity() {
         )}
 
         <div className="mb-8 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-[#8B5CF6] flex items-center justify-center shadow-lg shadow-purple-500/30">
+          <div className="w-12 h-12 rounded-2xl bg-[#1F2937] flex items-center justify-center shadow-sm shadow-black/10">
             <Briefcase className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -96,7 +96,7 @@ export default function PostOpportunity() {
                   <div className="relative">
                     <f.Icon className="w-[18px] h-[18px] text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
                     <input required name={f.name} value={(formData as any)[f.name]} onChange={handleChange} placeholder={f.ph}
-                      className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400" />
+                      className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400" />
                   </div>
                 </div>
               ))}
@@ -106,7 +106,7 @@ export default function PostOpportunity() {
               <div>
                 <label className="block text-[14px] font-bold text-slate-900 mb-2">Opportunity Type *</label>
                 <select name="type" value={formData.type} onChange={handleChange}
-                  className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all appearance-none cursor-pointer">
+                  className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all appearance-none cursor-pointer">
                   <option>Full-time</option>
                   <option>Internship</option>
                   <option>Contract</option>
@@ -117,7 +117,7 @@ export default function PostOpportunity() {
                 <div className="relative">
                   <MapPin className="w-[18px] h-[18px] text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
                   <input required name="location" value={formData.location} onChange={handleChange} placeholder="e.g., Bangalore, Remote"
-                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400" />
+                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400" />
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function PostOpportunity() {
                 <div className="relative">
                   <span className="text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 font-bold select-none">₹</span>
                   <input required name="package" value={formData.package} onChange={handleChange} placeholder="e.g., ₹12-15 LPA or ₹50k/month"
-                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-10 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400" />
+                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-10 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400" />
                 </div>
               </div>
               <div>
@@ -136,7 +136,7 @@ export default function PostOpportunity() {
                 <div className="relative">
                   <LinkIcon className="w-[18px] h-[18px] text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
                   <input name="applyLink" value={formData.applyLink} onChange={handleChange} placeholder="https://company.com/apply"
-                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400" />
+                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400" />
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function PostOpportunity() {
               <label className="block text-[14px] font-bold text-slate-900 mb-2">Job Description *</label>
               <textarea required name="description" value={formData.description} onChange={handleChange}
                 placeholder="Enter detailed job description, responsibilities, and requirements..." rows={4}
-                className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all resize-none placeholder:text-slate-400" />
+                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all resize-none placeholder:text-slate-400" />
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export default function PostOpportunity() {
                 <div className="relative">
                   <GraduationCap className="w-[18px] h-[18px] text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
                   <input required type="number" step="0.1" min="0" max="10" name="minCGPA" value={formData.minCGPA} onChange={handleChange} placeholder="e.g., 7.0"
-                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400" />
+                    className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400" />
                 </div>
               </div>
               <div>
@@ -171,7 +171,7 @@ export default function PostOpportunity() {
                     return (
                       <button key={branch} type="button" onClick={() => toggleBranch(branch)}
                         className={`px-4 py-2 rounded-xl text-[13px] font-bold transition-all border ${
-                          isSelected ? "bg-purple-100/50 text-purple-700 border-purple-300 shadow-sm" : "bg-[#f8fafc] text-slate-500 border-slate-200 hover:bg-slate-100"
+                          isSelected ? "bg-emerald-100/50 text-emerald-700 border-emerald-300 shadow-sm" : "bg-[#f8fafc] text-slate-500 border-slate-200 hover:bg-slate-100"
                         }`}>
                         {branch}
                       </button>
@@ -185,7 +185,7 @@ export default function PostOpportunity() {
               <label className="block text-[14px] font-bold text-slate-900 mb-2">Required Skills</label>
               <input name="requiredSkills" value={formData.requiredSkills} onChange={handleChange}
                 placeholder="e.g., JavaScript, React, Node.js, Python, SQL"
-                className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400" />
+                className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400" />
               <p className="text-[12px] font-semibold text-slate-400 mt-2">Separate skills with commas</p>
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function PostOpportunity() {
                   <div className="relative">
                     <Calendar className="w-[18px] h-[18px] text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 z-10 pointer-events-none" />
                     <input required={f.req} type="date" name={f.name} value={(formData as any)[f.name]} onChange={handleChange}
-                      className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all" />
+                      className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all" />
                   </div>
                 </div>
               ))}
@@ -217,7 +217,7 @@ export default function PostOpportunity() {
               Cancel
             </Link>
             <button disabled={loading} type="submit"
-              className="px-8 py-3.5 bg-[#8B5CF6] hover:bg-[#7C3AED] disabled:opacity-60 text-white text-[15px] font-bold rounded-xl shadow-[0_4px_20px_0_rgb(139,92,246,0.39)] transition-all active:scale-[0.98] flex items-center justify-center">
+              className="px-8 py-3.5 bg-[#1F2937] hover:bg-[#111827] disabled:opacity-60 text-white text-[15px] font-bold rounded-xl shadow-sm transition-all active:scale-[0.98] flex items-center justify-center">
               {loading ? (
                 <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />Posting...</>
               ) : "Post Opportunity"}

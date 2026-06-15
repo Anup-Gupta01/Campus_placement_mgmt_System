@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -152,7 +152,7 @@ export default function StudentNavbar() {
 
           {/* ── Logo ── */}
           <Link href="/student/dashboard" className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-md shadow-blue-600/25 group-hover:shadow-blue-600/40 transition-shadow">
+            <div className="w-9 h-9 bg-[#1F2937] rounded-xl flex items-center justify-center shadow-md shadow-black/15 group-hover:shadow-black/25 transition-shadow">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <div className="hidden sm:block">
@@ -169,7 +169,7 @@ export default function StudentNavbar() {
                 href={link.href}
                 className={`px-4 py-2 text-[13px] font-semibold rounded-lg transition-all ${
                   pathname === link.href
-                    ? "text-blue-600 bg-blue-50"
+                    ? "text-emerald-600 bg-emerald-50"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
@@ -209,12 +209,12 @@ export default function StudentNavbar() {
               {notifOpen && (
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-100 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
                   {/* Header */}
-                  <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-gradient-to-r from-blue-50 to-indigo-50">
+                  <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-emerald-50/60">
                     <div className="flex items-center gap-2">
-                      <Bell className="w-4 h-4 text-blue-600" />
+                      <Bell className="w-4 h-4 text-emerald-600" />
                       <span className="text-[13px] font-bold text-slate-800">Notices</span>
                       {notices.length > 0 && (
-                        <span className="text-[10px] bg-blue-100 text-blue-600 font-bold px-1.5 py-0.5 rounded-full">
+                        <span className="text-[10px] bg-emerald-100 text-emerald-600 font-bold px-1.5 py-0.5 rounded-full">
                           {notices.length}
                         </span>
                       )}
@@ -273,7 +273,7 @@ export default function StudentNavbar() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title="View PDF"
-                                className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-lg bg-blue-50 text-blue-500 hover:bg-blue-100 hover:text-blue-700 transition-all mt-0.5"
+                                className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-lg bg-emerald-50 text-emerald-500 hover:bg-emerald-100 hover:text-emerald-700 transition-all mt-0.5"
                               >
                                 <ExternalLink className="w-3.5 h-3.5" />
                               </a>
@@ -303,7 +303,7 @@ export default function StudentNavbar() {
                 className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-xl hover:bg-slate-100 transition-all group"
               >
                 {/* Avatar */}
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-[12px] font-extrabold shadow-md shadow-blue-500/20 flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-[#1F2937] flex items-center justify-center text-white text-[12px] font-extrabold shadow-md shadow-black/10 flex-shrink-0">
                   {initials}
                 </div>
                 {/* Name (desktop) */}
@@ -324,7 +324,7 @@ export default function StudentNavbar() {
                   {/* User info header */}
                   <div className="px-4 py-3 border-b border-slate-100 mb-1">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-[13px] font-extrabold flex-shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-[#1F2937] flex items-center justify-center text-white text-[13px] font-extrabold flex-shrink-0">
                         {initials}
                       </div>
                       <div className="min-w-0">
@@ -346,14 +346,14 @@ export default function StudentNavbar() {
                         onClick={() => setDropOpen(false)}
                         className={`flex items-center gap-3 mx-2 px-3 py-2.5 rounded-xl text-[13px] font-semibold transition-all group ${
                           active
-                            ? "bg-blue-50 text-blue-600"
+                            ? "bg-emerald-50 text-emerald-600"
                             : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                         }`}
                       >
                         <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                          active ? "bg-blue-100" : "bg-slate-100 group-hover:bg-slate-200"
+                          active ? "bg-emerald-100" : "bg-slate-100 group-hover:bg-slate-200"
                         }`}>
-                          <item.icon className={`w-3.5 h-3.5 ${active ? "text-blue-600" : "text-slate-500"}`} />
+                          <item.icon className={`w-3.5 h-3.5 ${active ? "text-emerald-600" : "text-slate-500"}`} />
                         </div>
                         {item.label}
                       </Link>
@@ -420,7 +420,7 @@ export default function StudentNavbar() {
                     href={notice.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
                   >
                     <Bell className="w-4 h-4 text-slate-400 flex-shrink-0" />
                     <span className="truncate">{notice.title}</span>
@@ -437,9 +437,9 @@ export default function StudentNavbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all group"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all group"
                 >
-                  <item.icon className="w-4 h-4 text-slate-400 group-hover:text-blue-500" />
+                  <item.icon className="w-4 h-4 text-slate-400 group-hover:text-emerald-500" />
                   {item.label}
                 </Link>
               ))}

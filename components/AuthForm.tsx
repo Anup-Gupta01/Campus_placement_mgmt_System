@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -156,14 +156,14 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center p-6 bg-[#F8FAFC]">
-      <div className="w-full max-w-[1200px] bg-white rounded-[32px] shadow-2xl shadow-indigo-100/50 overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+    <div className="flex-1 flex items-center justify-center p-6 bg-[#F9FAFB]">
+      <div className="w-full max-w-[1200px] bg-white rounded-[32px] shadow-2xl shadow-slate-200/80 overflow-hidden flex flex-col lg:flex-row border border-slate-100">
         
         {/* Left Panel */}
-        <div className="hidden lg:flex flex-col flex-1 p-16 justify-center bg-gradient-to-br from-indigo-50/50 to-white relative">
+        <div className="hidden lg:flex flex-col flex-1 p-16 justify-center bg-[#F9FAFB] relative">
           <h1 className="text-[48px] font-extrabold text-slate-950 tracking-tight leading-[1.1] mb-6">
             Your Gateway to <br />
-            <span className="bg-clip-text text-transparent bg-[#2563EB] bg-gradient-to-r from-blue-600 to-violet-600">
+            <span className="text-emerald-600">
               Career Success
             </span>
           </h1>
@@ -191,16 +191,16 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <button 
                     onClick={() => { setRole("student"); setSignupStep(1); setErrorMsg(""); setMode("login"); }}
-                    className={`flex flex-col items-center justify-center p-4 rounded-[20px] border-[1.5px] transition-all ${role === "student" ? "border-blue-600 bg-blue-50/50 text-blue-700 shadow-sm" : "border-slate-100 bg-white text-slate-500 hover:border-slate-200 hover:bg-slate-50"}`}
+                    className={`flex flex-col items-center justify-center p-4 rounded-[20px] border-[1.5px] transition-all ${role === "student" ? "border-emerald-600 bg-emerald-50/50 text-[#1F2937] shadow-sm" : "border-slate-100 bg-white text-slate-500 hover:border-slate-200 hover:bg-slate-50"}`}
                   >
-                    <GraduationCap className={`h-8 w-8 mb-2 ${role === "student" ? "text-blue-600" : "text-slate-400"}`} strokeWidth={role === "student" ? 2.5 : 2} />
+                    <GraduationCap className={`h-8 w-8 mb-2 ${role === "student" ? "text-emerald-600" : "text-slate-400"}`} strokeWidth={role === "student" ? 2.5 : 2} />
                     <span className="font-semibold text-[15px]">Student</span>
                   </button>
                   <button 
                     onClick={() => { setRole("admin"); setSignupStep(1); setErrorMsg(""); setMode("login"); }}
-                    className={`flex flex-col items-center justify-center p-4 rounded-[20px] border-[1.5px] transition-all ${role === "admin" ? "border-blue-600 bg-blue-50/50 text-blue-700 shadow-sm" : "border-slate-100 bg-white text-slate-500 hover:border-slate-200 hover:bg-slate-50"}`}
+                    className={`flex flex-col items-center justify-center p-4 rounded-[20px] border-[1.5px] transition-all ${role === "admin" ? "border-emerald-600 bg-emerald-50/50 text-[#1F2937] shadow-sm" : "border-slate-100 bg-white text-slate-500 hover:border-slate-200 hover:bg-slate-50"}`}
                   >
-                    <Building2 className={`h-8 w-8 mb-2 ${role === "admin" ? "text-blue-600" : "text-slate-400"}`} strokeWidth={role === "admin" ? 2.5 : 2}/>
+                    <Building2 className={`h-8 w-8 mb-2 ${role === "admin" ? "text-emerald-600" : "text-slate-400"}`} strokeWidth={role === "admin" ? 2.5 : 2}/>
                     <span className="font-semibold text-[15px]">TnP Admin</span>
                   </button>
                 </div>
@@ -235,7 +235,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
             )}
             {mode === "signup" && signupStep === "otp" && (
                <div className="mb-6">
-                 <h3 className="text-[22px] font-extrabold text-slate-900 mb-2 flex items-center"><KeyRound className="h-6 w-6 mr-2 text-blue-600"/> Verify your Account</h3>
+                 <h3 className="text-[22px] font-extrabold text-slate-900 mb-2 flex items-center"><KeyRound className="h-6 w-6 mr-2 text-emerald-600"/> Verify your Account</h3>
                  <p className="text-sm font-medium text-slate-500">We've sent a 6-digit OTP to your <span className="font-bold text-slate-700">{verifyVia === 'email' ? email : mobileNo}</span></p>
                </div>
             )}
@@ -262,24 +262,24 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Email</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Mail className="h-[18px] w-[18px]" /></div>
-                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="student@university.edu" />
+                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="student@university.edu" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Password</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Lock className="h-[18px] w-[18px]" /></div>
-                      <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="••••••••" />
+                      <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="••••••••" />
                     </div>
                   </div>
                   <div className="flex items-center justify-between mt-5">
                     <label className="flex items-center space-x-2.5 cursor-pointer">
-                      <input type="checkbox" className="w-4 h-4 rounded-[4px] border-slate-300 text-blue-600 bg-white focus:ring-blue-600" />
+                      <input type="checkbox" className="w-4 h-4 rounded-[4px] border-slate-300 text-emerald-600 bg-white focus:ring-emerald-600" />
                       <span className="text-[14px] font-semibold text-slate-600">Remember me</span>
                     </label>
-                    <button type="button" onClick={() => { setMode("forgot-password"); setErrorMsg(""); }} className="text-[14px] font-bold text-blue-600 hover:text-blue-700 transition-colors">Forgot password?</button>
+                    <button type="button" onClick={() => { setMode("forgot-password"); setErrorMsg(""); }} className="text-[14px] font-bold text-emerald-600 hover:text-[#1F2937] transition-colors">Forgot password?</button>
                   </div>
-                  <button onClick={handleLoginSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
+                  <button onClick={handleLoginSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#1F2937] hover:bg-[#111827] text-white font-bold text-[15px] rounded-xl shadow-md shadow-black/10 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
                     {loading ? "Please wait..." : `Sign In as ${role === "student" ? "Student" : "Admin"}`}
                   </button>
                 </>
@@ -296,10 +296,10 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Email</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Mail className="h-[18px] w-[18px]" /></div>
-                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="youremail@university.edu" />
+                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="youremail@university.edu" />
                     </div>
                   </div>
-                  <button onClick={handleForgotPasswordSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
+                  <button onClick={handleForgotPasswordSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#1F2937] hover:bg-[#111827] text-white font-bold text-[15px] rounded-xl shadow-md shadow-black/10 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
                     {loading ? "Sending OTP..." : "Send OTP"}
                   </button>
                   <div className="text-center mt-4">
@@ -318,14 +318,14 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                       <label className="block text-[13px] font-bold text-slate-700 mb-1.5">First Name</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><UserIcon className="h-[18px] w-[18px]" /></div>
-                        <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="John" />
+                        <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="John" />
                       </div>
                     </div>
                     <div>
                       <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Last Name</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><UserIcon className="h-[18px] w-[18px]" /></div>
-                        <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="Doe" />
+                        <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="Doe" />
                       </div>
                     </div>
                   </div>
@@ -333,28 +333,28 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Email</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Mail className="h-[18px] w-[18px]" /></div>
-                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder={role === "student" ? "student@university.edu" : "tnp@university.edu"} />
+                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder={role === "student" ? "student@university.edu" : "tnp@university.edu"} />
                     </div>
                   </div>
                   <div>
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Mobile No.</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Phone className="h-[18px] w-[18px]" /></div>
-                      <input type="tel" value={mobileNo} onChange={e => setMobileNo(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="9876543210" />
+                      <input type="tel" value={mobileNo} onChange={e => setMobileNo(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="9876543210" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Password</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Lock className="h-[18px] w-[18px]" /></div>
-                      <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="••••••••" />
+                      <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="••••••••" />
                     </div>
                   </div>
                   
                   <button onClick={() => {
                     if(!firstName || !lastName || !email || !password || !mobileNo) setErrorMsg("Please fill all basic info fields.");
                     else { setErrorMsg(""); setSignupStep(2); }
-                  }} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98]">
+                  }} className="w-full py-3.5 mt-8 bg-[#1F2937] hover:bg-[#111827] text-white font-bold text-[15px] rounded-xl shadow-md shadow-black/10 transition-all active:scale-[0.98]">
                     Next: Academic Details
                   </button>
                 </>
@@ -367,7 +367,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">University Code</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><KeyRound className="h-[18px] w-[18px]" /></div>
-                      <input type="text" value={universityCode} onChange={e => setUniversityCode(e.target.value.toUpperCase())} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white uppercase tracking-widest" placeholder="e.g. IITB" maxLength={10} />
+                      <input type="text" value={universityCode} onChange={e => setUniversityCode(e.target.value.toUpperCase())} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white uppercase tracking-widest" placeholder="e.g. IITB" maxLength={10} />
                     </div>
                     <p className="text-[11px] text-slate-400 mt-1">Enter the code provided by your TnP office</p>
                   </div>
@@ -376,7 +376,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                     <label className="block text-[13px] font-bold text-slate-700 mb-1.5">University / College</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><School className="h-[18px] w-[18px]" /></div>
-                      <input type="text" value={university} onChange={e => setUniversity(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="Harvard University" />
+                      <input type="text" value={university} onChange={e => setUniversity(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="Harvard University" />
                     </div>
                   </div>
 
@@ -387,12 +387,12 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Course</label>
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><BookOpen className="h-[18px] w-[18px]" /></div>
-                            <input type="text" value={course} onChange={e => setCourse(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="B.Tech" />
+                            <input type="text" value={course} onChange={e => setCourse(e.target.value)} className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="B.Tech" />
                           </div>
                         </div>
                         <div>
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Branch</label>
-                          <select value={branch} onChange={e => setBranch(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white">
+                          <select value={branch} onChange={e => setBranch(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white">
                              <option value="">Select</option>
                              <option value="CSE">CSE</option>
                              <option value="ME">ME</option>
@@ -407,11 +407,11 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                       <div className="grid grid-cols-3 gap-3.5 mt-3.5">
                         <div>
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Passing Yr</label>
-                          <input type="number" value={year} onChange={e => setYear(e.target.value)} className="w-full pl-3 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="2026" />
+                          <input type="number" value={year} onChange={e => setYear(e.target.value)} className="w-full pl-3 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="2026" />
                         </div>
                         <div>
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Gender</label>
-                          <select value={gender} onChange={e => setGender(e.target.value)} className="w-full px-2 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white">
+                          <select value={gender} onChange={e => setGender(e.target.value)} className="w-full px-2 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white">
                             <option value="">Select</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -420,7 +420,7 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                         </div>
                         <div>
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">DOB</label>
-                          <input type="date" value={dob} onChange={e => setDob(e.target.value)} className="w-full px-2 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" />
+                          <input type="date" value={dob} onChange={e => setDob(e.target.value)} className="w-full px-2 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" />
                         </div>
                       </div>
                     </>
@@ -429,16 +429,16 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                       <div className="grid grid-cols-2 gap-3.5 mt-3.5">
                         <div>
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">TnP Position</label>
-                          <input type="text" value={designation} onChange={e => setDesignation(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="e.g. Placement Officer" />
+                          <input type="text" value={designation} onChange={e => setDesignation(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="e.g. Placement Officer" />
                         </div>
                         <div>
                           <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Job ID</label>
-                          <input type="text" value={jobId} onChange={e => setJobId(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white" placeholder="e.g. EMP-12345" />
+                          <input type="text" value={jobId} onChange={e => setJobId(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white" placeholder="e.g. EMP-12345" />
                         </div>
                       </div>
                       <div className="mt-3.5">
                         <label className="block text-[13px] font-bold text-slate-700 mb-1.5">Gender</label>
-                        <select value={gender} onChange={e => setGender(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 outline-none transition-all text-black bg-white">
+                        <select value={gender} onChange={e => setGender(e.target.value)} className="w-full px-4 py-3 border border-slate-200 rounded-xl text-[14px] font-medium focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 outline-none transition-all text-black bg-white">
                           <option value="">Select</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
@@ -451,16 +451,16 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
                   <div className="pt-2">
                     <label className="block text-[13px] font-bold text-slate-700 mb-2">Send OTP code via:</label>
                     <div className="flex space-x-3">
-                      <button type="button" onClick={() => setVerifyVia('email')} className={`flex-1 py-2.5 rounded-lg border-2 text-[13px] font-bold flex items-center justify-center transition-all ${verifyVia === 'email' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'}`}>
+                      <button type="button" onClick={() => setVerifyVia('email')} className={`flex-1 py-2.5 rounded-lg border-2 text-[13px] font-bold flex items-center justify-center transition-all ${verifyVia === 'email' ? 'border-emerald-600 bg-emerald-50 text-[#1F2937]' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'}`}>
                         <Mail className="w-4 h-4 mr-2" /> Email
                       </button>
-                      <button type="button" onClick={() => setVerifyVia('mobile')} className={`flex-1 py-2.5 rounded-lg border-2 text-[13px] font-bold flex items-center justify-center transition-all ${verifyVia === 'mobile' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'}`}>
+                      <button type="button" onClick={() => setVerifyVia('mobile')} className={`flex-1 py-2.5 rounded-lg border-2 text-[13px] font-bold flex items-center justify-center transition-all ${verifyVia === 'mobile' ? 'border-emerald-600 bg-emerald-50 text-[#1F2937]' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'}`}>
                         <Smartphone className="w-4 h-4 mr-2" /> Mobile SMS
                       </button>
                     </div>
                   </div>
 
-                  <button onClick={handleSignupSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
+                  <button onClick={handleSignupSubmit} disabled={loading} className="w-full py-3.5 mt-8 bg-[#1F2937] hover:bg-[#111827] text-white font-bold text-[15px] rounded-xl shadow-md shadow-black/10 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
                     {loading ? "Please wait..." : "Create Account & Send OTP"}
                   </button>
                 </>
@@ -469,9 +469,9 @@ export default function AuthForm({ defaultMode = "login", defaultRole = "student
               {/* === SIGNUP STEP 3 (OTP) === */}
               {mode === "signup" && signupStep === "otp" && (
                 <div className="pt-2">
-                  <input type="text" value={otp} onChange={e => setOtp(e.target.value)} maxLength={6} className="w-full text-center tracking-[1em] text-[24px] pr-2 py-4 bg-white border-2 border-slate-200 rounded-2xl font-bold focus:outline-none focus:ring-4 focus:ring-blue-600/20 focus:border-blue-600 transition-all text-black mb-6" placeholder="------" />
+                  <input type="text" value={otp} onChange={e => setOtp(e.target.value)} maxLength={6} className="w-full text-center tracking-[1em] text-[24px] pr-2 py-4 bg-white border-2 border-slate-200 rounded-2xl font-bold focus:outline-none focus:ring-4 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all text-black mb-6" placeholder="------" />
                   
-                  <button onClick={handleVerifyOtp} disabled={loading || otp.length !== 6} className="w-full py-4 bg-[#00B859] hover:bg-[#009E4B] text-white font-bold text-[16px] rounded-xl shadow-[0_4px_14px_0_rgb(0,184,89,0.39)] transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+                  <button onClick={handleVerifyOtp} disabled={loading || otp.length !== 6} className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[16px] rounded-xl shadow-md shadow-emerald-900/20 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
                     {loading ? "Verifying..." : "Verify OTP & Continue"}
                   </button>
                 </div>

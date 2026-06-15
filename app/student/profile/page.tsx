@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { 
@@ -270,7 +270,7 @@ export default function StudentProfile() {
     return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
-  if (loading) return <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-blue-600"/></div>;
+  if (loading) return <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-emerald-600"/></div>;
 
   return (
     <div className="min-h-screen bg-[#F9FAFB] text-slate-900 w-full font-sans pb-20">
@@ -291,7 +291,7 @@ export default function StudentProfile() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-8 w-full">
         
         {/* Gradient Banner */}
-        <div className="w-full bg-gradient-to-r from-[#4F46E5] to-[#8B5CF6] rounded-[20px] p-8 sm:p-10 text-white shadow-lg mb-8 relative overflow-hidden">
+        <div className="w-full bg-gradient-to-r from-[#1F2937] to-[#374151] rounded-[20px] p-8 sm:p-10 text-white shadow-lg mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-10 blur-[50px]"></div>
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 relative z-10">
@@ -407,7 +407,7 @@ export default function StudentProfile() {
                       )}
                       
                       {proj.link && (
-                        <a href={proj.link.startsWith('http') ? proj.link : `https://${proj.link}`} target="_blank" rel="noreferrer" className="text-[13px] font-semibold text-blue-600 hover:text-blue-700 flex items-center">
+                        <a href={proj.link.startsWith('http') ? proj.link : `https://${proj.link}`} target="_blank" rel="noreferrer" className="text-[13px] font-semibold text-emerald-600 hover:text-[#1F2937] flex items-center">
                           <GitBranch className="w-4 h-4 mr-1.5"/> {proj.link}
                         </a>
                       )}
@@ -441,9 +441,9 @@ export default function StudentProfile() {
               {/* List of resumes from array */}
               {user?.resumes && user.resumes.length > 0 ? (
                 user.resumes.map((resume: any, i: number) => (
-                  <div key={i} className="border border-slate-200 rounded-2xl p-4 mb-4 bg-white hover:border-blue-200 transition-all">
+                  <div key={i} className="border border-slate-200 rounded-2xl p-4 mb-4 bg-white hover:border-emerald-200 transition-all">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="w-10 h-10 bg-[#EEF2FF] text-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
                         <FileText className="w-5 h-5"/>
                       </div>
                       <div className="flex-1 overflow-hidden">
@@ -475,7 +475,7 @@ export default function StudentProfile() {
                         target="_blank"
                         rel="noopener noreferrer"
                         download
-                        className="flex-1 py-1.5 bg-indigo-50 border border-indigo-200 text-indigo-700 text-[12px] font-bold rounded-lg flex items-center justify-center hover:bg-indigo-100"
+                        className="flex-1 py-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-bold rounded-lg flex items-center justify-center hover:bg-emerald-100"
                       >
                         Download
                       </a>
@@ -535,19 +535,19 @@ export default function StudentProfile() {
             <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
               
               {/* Intelligent Fill Option */}
-              <div className="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5 relative overflow-hidden">
+              <div className="mb-8 bg-gradient-to-r from-emerald-50 to-slate-50 border border-blue-100 rounded-2xl p-5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 -mr-6 -mt-6">
-                  <Wand2 className="w-24 h-24 text-blue-500 opacity-10 rotate-12" />
+                  <Wand2 className="w-24 h-24 text-emerald-500 opacity-10 rotate-12" />
                 </div>
                 <h3 className="text-[16px] font-bold text-blue-900 mb-2 flex items-center">
                   <Wand2 className="w-4 h-4 mr-2" /> Auto-fill from Resume
                 </h3>
-                <p className="text-[13px] text-blue-700 font-medium mb-4">
+                <p className="text-[13px] text-[#1F2937] font-medium mb-4">
                   Save time! Upload your PDF resume, and our AI will extract your skills, projects, and achievements automatically.
                 </p>
                 <button 
                   disabled={isAutoFilling}
-                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl shadow-sm shadow-blue-600/20 transition-all flex items-center disabled:opacity-50 relative overflow-hidden"
+                  className="px-5 py-2.5 bg-[#1F2937] hover:bg-[#111827] text-white text-sm font-bold rounded-xl shadow-sm shadow-blue-600/20 transition-all flex items-center disabled:opacity-50 relative overflow-hidden"
                 >
                   <input type="file" accept=".pdf" onChange={handleAutoFill} disabled={isAutoFilling} title="Upload PDF to Auto-fill" className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
                   {isAutoFilling ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Upload className="w-4 h-4 mr-2"/>}
@@ -610,7 +610,7 @@ export default function StudentProfile() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                     <h4 className="text-sm font-bold text-slate-900">Projects</h4>
-                    <button type="button" onClick={addProjectField} className="text-[12px] font-bold text-blue-600 flex items-center hover:text-blue-700">
+                    <button type="button" onClick={addProjectField} className="text-[12px] font-bold text-emerald-600 flex items-center hover:text-[#1F2937]">
                       <PlusCircle className="w-3.5 h-3.5 mr-1" /> Add Project
                     </button>
                   </div>

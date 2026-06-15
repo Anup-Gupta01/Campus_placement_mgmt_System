@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -61,7 +61,7 @@ function ResetPasswordForm() {
     <div className="flex-1 flex items-center justify-center p-6 bg-[#F8FAFC] min-h-screen">
       <div className="w-full max-w-[500px] bg-white rounded-[32px] shadow-2xl shadow-indigo-100/50 overflow-hidden border border-slate-100 p-8 sm:p-12">
         <div className="mb-8 text-center">
-          <div className="h-16 w-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="h-16 w-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <KeyRound className="h-8 w-8" />
           </div>
           <h2 className="text-[28px] font-extrabold text-slate-900 tracking-tight">Reset Password</h2>
@@ -107,7 +107,7 @@ function ResetPasswordForm() {
             </div>
           </div>
 
-          <button onClick={handleResetSubmit} disabled={loading || otp.length !== 6 || !newPassword} className="w-full py-3.5 mt-8 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-[15px] rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
+          <button onClick={handleResetSubmit} disabled={loading || otp.length !== 6 || !newPassword} className="w-full py-3.5 mt-8 bg-[#1F2937] hover:bg-[#111827] text-white font-bold text-[15px] rounded-xl shadow-md shadow-black/10 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
             {loading ? "Resetting..." : "Confirm Password Reset"}
           </button>
         </form>

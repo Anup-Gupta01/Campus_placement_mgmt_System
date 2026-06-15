@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { ArrowLeft, Search, Upload, Download, FileText, ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -12,8 +12,8 @@ export default function ManageApplicants() {
   // Mock Stats matching UI exactly
   const stats = [
     { label: "Total Applicants", count: 145, textColor: "text-slate-900", bg: "bg-white" },
-    { label: "Shortlisted", count: 12, textColor: "text-blue-600", bg: "bg-blue-50/50" },
-    { label: "In Interview", count: 1, textColor: "text-purple-600", bg: "bg-purple-50/50" },
+    { label: "Shortlisted", count: 12, textColor: "text-emerald-600", bg: "bg-emerald-50/50" },
+    { label: "In Interview", count: 1, textColor: "text-emerald-600", bg: "bg-emerald-50/50" },
     { label: "Selected", count: 0, textColor: "text-emerald-600", bg: "bg-emerald-50/50" },
     { label: "Rejected", count: 23, textColor: "text-red-600", bg: "bg-red-50/50" },
   ];
@@ -56,11 +56,11 @@ export default function ManageApplicants() {
           <div className="flex items-center gap-4 w-full md:w-auto">
             <div className="relative w-full md:w-[320px]">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-slate-400" />
-              <input type="text" placeholder="Search applicants..." className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all placeholder:text-slate-400"/>
+              <input type="text" placeholder="Search applicants..." className="w-full bg-[#f8fafc] border border-slate-200 text-slate-900 text-[14px] font-medium rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all placeholder:text-slate-400"/>
             </div>
             
             <div className="relative w-full md:w-[150px]">
-               <select className="w-full bg-[#f8fafc] border border-slate-200 text-slate-700 text-[14px] font-bold rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all cursor-pointer">
+               <select className="w-full bg-[#f8fafc] border border-slate-200 text-slate-700 text-[14px] font-bold rounded-xl px-4 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all cursor-pointer">
                  <option>All Status</option>
                  <option>Applied</option>
                  <option>Shortlisted</option>
@@ -108,7 +108,7 @@ export default function ManageApplicants() {
                   <tr key={app.id} className="hover:bg-slate-50 transition-colors">
                     <td className="px-7 py-5">
                       <p className="text-[14.5px] font-bold text-slate-900 mb-1">{app.name}</p>
-                      <a href="#" className="flex items-center text-[12px] font-semibold text-blue-600 hover:underline">
+                      <a href="#" className="flex items-center text-[12px] font-semibold text-emerald-600 hover:underline">
                         <FileText className="w-3.5 h-3.5 mr-1" /> View Resume
                       </a>
                     </td>
@@ -133,7 +133,7 @@ export default function ManageApplicants() {
                     <td className="px-7 py-5 text-[13.5px] font-semibold text-slate-700">{app.date}</td>
                     <td className="px-7 py-5">
                       <div className="relative w-[130px]">
-                        <select defaultValue={app.status} className="w-full bg-white border border-slate-200 text-slate-700 text-[13px] font-bold rounded-xl px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all cursor-pointer shadow-sm">
+                        <select defaultValue={app.status} className="w-full bg-white border border-slate-200 text-slate-700 text-[13px] font-bold rounded-xl px-4 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600 transition-all cursor-pointer shadow-sm">
                           <option>Applied</option>
                           <option>Shortlisted</option>
                           <option>Interview</option>

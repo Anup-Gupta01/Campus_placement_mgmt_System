@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -34,10 +34,10 @@ type Application = {
 };
 
 const STATUS_CONFIG: Record<string, { bg: string; text: string; border: string }> = {
-  Applied:       { bg: "bg-blue-50",    text: "text-blue-700",    border: "border-blue-200"   },
+  Applied:       { bg: "bg-emerald-50",    text: "text-[#1F2937]",    border: "border-emerald-200"   },
   Shortlisted:   { bg: "bg-teal-50",    text: "text-teal-700",    border: "border-teal-200"   },
   "OA Pending":  { bg: "bg-orange-50",  text: "text-orange-700",  border: "border-orange-200" },
-  Interview:     { bg: "bg-purple-50",  text: "text-purple-700",  border: "border-purple-200" },
+  Interview:     { bg: "bg-amber-50",  text: "text-amber-700",  border: "border-amber-200" },
   Selected:      { bg: "bg-green-50",   text: "text-green-700",   border: "border-green-200"  },
   Rejected:      { bg: "bg-red-50",     text: "text-red-600",     border: "border-red-200"    },
 };
@@ -50,8 +50,8 @@ function formatDate(d: string | null) {
 function getProgressColor(status: string) {
   if (status === "Selected") return "bg-gradient-to-r from-emerald-400 to-green-500";
   if (status === "Rejected")  return "bg-gradient-to-r from-red-400 to-red-500";
-  if (status === "Interview") return "bg-gradient-to-r from-purple-400 to-purple-600";
-  return "bg-gradient-to-r from-blue-400 to-blue-600";
+  if (status === "Interview") return "bg-gradient-to-r from-emerald-400 to-emerald-600";
+  return "bg-gradient-to-r from-emerald-400 to-emerald-600";
 }
 
 function ApplicationCard({ app }: { app: Application }) {
@@ -77,7 +77,7 @@ function ApplicationCard({ app }: { app: Application }) {
             <div className={`w-13 h-13 w-[52px] h-[52px] rounded-2xl flex items-center justify-center text-xl font-extrabold flex-shrink-0 ${
               isSelected ? "bg-green-100 text-green-700"
               : isRejected ? "bg-red-100 text-red-600"
-              : "bg-gradient-to-br from-blue-100 to-indigo-100 text-blue-700"
+              : "bg-gradient-to-br from-emerald-50 to-emerald-100 text-[#1F2937]"
             }`}>
               {app.opportunity.companyName.charAt(0)}
             </div>
@@ -130,7 +130,7 @@ function ApplicationCard({ app }: { app: Application }) {
         {/* Toggle Timeline */}
         <button
           onClick={() => setExpanded(!expanded)}
-          className="w-full flex items-center justify-center gap-2 text-[12px] font-bold text-slate-500 hover:text-blue-600 py-2 rounded-xl hover:bg-slate-50 transition-all"
+          className="w-full flex items-center justify-center gap-2 text-[12px] font-bold text-slate-500 hover:text-emerald-600 py-2 rounded-xl hover:bg-slate-50 transition-all"
         >
           <Clock className="w-3.5 h-3.5" />
           {expanded ? "Hide Timeline" : "View Application Timeline"}
@@ -150,13 +150,13 @@ function ApplicationCard({ app }: { app: Application }) {
                   {/* Connecting line */}
                   {!isLast && (
                     <div className={`absolute left-[11px] top-6 bottom-0 w-0.5 ${
-                      step.isCompleted ? "bg-blue-300" : "bg-slate-200"
+                      step.isCompleted ? "bg-emerald-300" : "bg-slate-200"
                     }`} />
                   )}
                   {/* Step dot */}
                   <div className="flex-shrink-0 z-10">
                     {step.isCompleted && !step.isCurrent ? (
-                      <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center mt-0.5">
                         <CheckCircle className="w-3.5 h-3.5 text-white" />
                       </div>
                     ) : step.isCurrent ? (
@@ -175,7 +175,7 @@ function ApplicationCard({ app }: { app: Application }) {
                     <div className="flex items-center justify-between">
                       <span className={`text-[13px] font-bold ${
                         step.isCurrent ? (isRejected ? "text-red-600" : "text-orange-600")
-                        : step.isCompleted ? "text-blue-600"
+                        : step.isCompleted ? "text-emerald-600"
                         : "text-slate-400"
                       }`}>
                         {step.stage}
@@ -209,7 +209,7 @@ function ApplicationCard({ app }: { app: Application }) {
             <Trophy className="w-3.5 h-3.5" />View Offer Letter
           </button>
         ) : !isRejected && (
-          <button className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-[12px] font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
+          <button className="flex-1 py-2.5 bg-[#1F2937] hover:bg-[#111827] text-white text-[12px] font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
             <Sparkles className="w-3.5 h-3.5" />
             Prepare for {app.timeline?.find(t => t.isCurrent)?.stage || "Next Round"}
           </button>
@@ -248,7 +248,7 @@ export default function MyApplications() {
     <div className="bg-[#F8FAFC] min-h-screen">
 
       {/* Page Header */}
-      <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+      <div className="bg-[#1F2937] text-white">
         <div className="max-w-5xl mx-auto px-5 sm:px-8 py-10">
           <Link href="/student/dashboard" className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-[13px] font-semibold mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to Dashboard
@@ -271,8 +271,8 @@ export default function MyApplications() {
               onClick={() => setFilter(f.key)}
               className={`px-4 py-2 rounded-xl text-[13px] font-bold transition-all whitespace-nowrap flex-shrink-0 ${
                 filter === f.key
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
-                  : "bg-white border border-slate-200 text-slate-600 hover:border-blue-300 hover:text-blue-600"
+                  ? "bg-[#1F2937] text-white shadow-md shadow-black/10"
+                  : "bg-white border border-slate-200 text-slate-600 hover:border-emerald-300 hover:text-emerald-600"
               }`}
             >
               {f.label}
@@ -309,7 +309,7 @@ export default function MyApplications() {
             </p>
             <Link
               href="/student/dashboard"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white text-[13px] font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-md"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1F2937] text-white text-[13px] font-bold rounded-xl hover:bg-[#111827] transition-colors shadow-md"
             >
               <Building2 className="w-4 h-4" />Browse Opportunities
             </Link>

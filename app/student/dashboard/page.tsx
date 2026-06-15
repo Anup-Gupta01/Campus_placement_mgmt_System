@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   Bell, Briefcase, Calendar, TrendingUp, Award, Search, Filter,
@@ -43,10 +43,10 @@ type Stats = {
 
 function getStatusColor(status: string) {
   const map: Record<string, string> = {
-    Applied:      "bg-blue-100 text-blue-700",
+    Applied:      "bg-emerald-100 text-emerald-700",
     Shortlisted:  "bg-emerald-100 text-emerald-700",
     "OA Pending": "bg-orange-100 text-orange-700",
-    Interview:    "bg-purple-100 text-purple-700",
+    Interview:    "bg-purple-100 text-amber-700",
     Selected:     "bg-green-100 text-green-700",
     Rejected:     "bg-red-100 text-red-600",
   };
@@ -56,7 +56,7 @@ function getStatusColor(status: string) {
 function getProgressColor(status: string) {
   if (status === "Selected") return "bg-emerald-500";
   if (status === "Rejected") return "bg-red-400";
-  return "bg-blue-600";
+  return "bg-[#1F2937]";
 }
 
 function timeAgo(dateStr: string): string {
@@ -153,9 +153,9 @@ export default function StudentDashboard() {
       value: stats.applications,
       sub: "Total submitted",
       icon: <Briefcase className="h-5 w-5" />,
-      gradient: "from-blue-500 to-blue-600",
-      lightBg: "bg-blue-50",
-      textColor: "text-blue-600",
+      gradient: "from-[#059669] to-[#047857]",
+      lightBg: "bg-emerald-50",
+      textColor: "text-emerald-600",
     },
     {
       label: "Interviews",
@@ -163,8 +163,8 @@ export default function StudentDashboard() {
       sub: "Rounds scheduled",
       icon: <Calendar className="h-5 w-5" />,
       gradient: "from-purple-500 to-purple-600",
-      lightBg: "bg-purple-50",
-      textColor: "text-purple-600",
+      lightBg: "bg-amber-50",
+      textColor: "text-amber-700",
     },
     {
       label: "Profile Score",
@@ -193,13 +193,13 @@ export default function StudentDashboard() {
     <div className="bg-[#F8FAFC] min-h-screen">
 
       {/* ── Hero Banner ── */}
-      <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white">
+      <div className="bg-[#1F2937] text-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-10">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="text-blue-200 text-[13px] font-semibold mb-1">Welcome back 👋</p>
+              <p className="text-emerald-300 text-[13px] font-semibold mb-1">Welcome back 👋</p>
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">{firstName}</h1>
-              <p className="text-blue-200 font-medium mt-2 text-[14px]">
+              <p className="text-emerald-300 font-medium mt-2 text-[14px]">
                 You have <span className="text-white font-bold">{filteredOpps.length}</span> new placement opportunities waiting.
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function StudentDashboard() {
                 <Sparkles className="w-4 h-4" /> Analyze Resume
               </Link>
               <Link href="/student/dashboard/myapplications"
-                className="flex items-center gap-2 px-4 py-2.5 bg-white rounded-xl text-[13px] font-bold text-blue-700 hover:bg-blue-50 transition-all shadow-sm">
+                className="flex items-center gap-2 px-4 py-2.5 bg-white rounded-xl text-[13px] font-bold text-emerald-700 hover:bg-emerald-50 transition-all shadow-sm">
                 <Briefcase className="w-4 h-4" /> My Applications
               </Link>
             </div>
@@ -241,7 +241,7 @@ export default function StudentDashboard() {
         {/* ── Quick Actions ── */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <Link href="/student/dashboard/resume-analyzer"
-            className="group flex items-center gap-4 bg-gradient-to-br from-indigo-600 to-purple-700 text-white p-5 rounded-[20px] shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all">
+            className="group flex items-center gap-4 bg-[#1F2937] hover:bg-[#111827] text-white p-5 rounded-[20px] shadow-md shadow-black/10 hover:shadow-black/15 transition-all">
             <div className="w-11 h-11 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
               <Sparkles className="w-5 h-5" />
             </div>
@@ -253,7 +253,7 @@ export default function StudentDashboard() {
           </Link>
 
           <Link href="/student/dashboard/myapplications"
-            className="group flex items-center gap-4 bg-gradient-to-br from-blue-600 to-cyan-600 text-white p-5 rounded-[20px] shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all">
+            className="group flex items-center gap-4 bg-[#1F2937] hover:bg-[#111827] text-white p-5 rounded-[20px] shadow-md shadow-blue-900/20 hover:shadow-blue-900/30 transition-all">
             <div className="w-11 h-11 bg-white/15 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
               <Briefcase className="w-5 h-5" />
             </div>
@@ -296,7 +296,7 @@ export default function StudentDashboard() {
                     <h2 className="text-[17px] font-bold text-slate-900">Available Opportunities</h2>
                     <p className="text-[13px] text-slate-400 font-medium mt-0.5">{filteredOpps.length} positions open for you</p>
                   </div>
-                  <Link href="/student/dashboard/myapplications" className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                  <Link href="/student/dashboard/myapplications" className="text-[12px] font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
                     View applied <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -320,7 +320,7 @@ export default function StudentDashboard() {
                         onClick={() => setTypeFilter(t)}
                         className={`px-3.5 py-2 text-[12px] font-bold rounded-xl transition-all whitespace-nowrap ${
                           typeFilter === t
-                            ? "bg-blue-600 text-white shadow-sm"
+                            ? "bg-[#1F2937] text-white shadow-sm"
                             : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                         }`}
                       >
@@ -362,11 +362,11 @@ export default function StudentDashboard() {
 
                     return (
                       <div key={opp._id}
-                        className="border border-slate-200 rounded-[16px] p-5 hover:border-blue-300 hover:shadow-md hover:shadow-blue-600/5 transition-all bg-white group">
+                        className="border border-slate-200 rounded-[16px] p-5 hover:border-emerald-300 hover:shadow-md hover:shadow-blue-600/5 transition-all bg-white group">
                         <div className="flex items-start gap-4">
                           {/* Logo placeholder */}
                           <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-[18px] font-extrabold flex-shrink-0 ${
-                            alreadyApplied ? "bg-green-100 text-green-700" : "bg-gradient-to-br from-blue-100 to-indigo-100 text-blue-700"
+                            alreadyApplied ? "bg-green-100 text-green-700" : "bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-700"
                           }`}>
                             {opp.companyName.charAt(0)}
                           </div>
@@ -382,7 +382,7 @@ export default function StudentDashboard() {
                                   {urgency.label}
                                 </span>
                                 <span className={`px-2.5 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider ${
-                                  alreadyApplied ? "bg-green-100 text-green-700" : "bg-blue-100 text-blue-700"
+                                  alreadyApplied ? "bg-green-100 text-green-700" : "bg-emerald-100 text-emerald-700"
                                 }`}>
                                   {alreadyApplied ? "Applied ✓" : "Open"}
                                 </span>
@@ -398,7 +398,7 @@ export default function StudentDashboard() {
                               </span>
                               <span className={`text-[11px] font-bold px-2.5 py-1 rounded-lg ${
                                 opp.type?.toLowerCase().includes("intern")
-                                  ? "bg-purple-100 text-purple-700"
+                                  ? "bg-purple-100 text-amber-700"
                                   : "bg-emerald-100 text-emerald-700"
                               }`}>
                                 {opp.type}
@@ -418,8 +418,8 @@ export default function StudentDashboard() {
                                   disabled={alreadyApplied || isApplying}
                                   className={`px-4 py-1.5 text-[12px] font-bold rounded-xl transition-all ${
                                     alreadyApplied
-                                      ? "bg-green-100 text-green-700 cursor-not-allowed"
-                                      : "bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 active:scale-[0.98]"
+                                       ? "bg-green-50 text-green-700 cursor-not-allowed"
+                                       : "bg-[#1F2937] hover:bg-[#111827] text-white shadow-md shadow-black/10 active:scale-[0.98]"
                                   }`}
                                 >
                                   {isApplying
@@ -451,7 +451,7 @@ export default function StudentDashboard() {
                   <h2 className="text-[15px] font-bold text-slate-900">Recent Applications</h2>
                   <p className="text-[12px] text-slate-400 font-medium mt-0.5">Your latest activity</p>
                 </div>
-                <Link href="/student/dashboard/myapplications" className="text-[11px] font-bold text-blue-600 flex items-center gap-0.5 hover:text-blue-700">
+                <Link href="/student/dashboard/myapplications" className="text-[11px] font-bold text-emerald-600 flex items-center gap-0.5 hover:text-emerald-700">
                   View all <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -497,7 +497,7 @@ export default function StudentDashboard() {
             </div>
 
             {/* Boost Profile Card */}
-            <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-[24px] p-6 text-white shadow-xl shadow-blue-600/20">
+            <div className="bg-[#1F2937] rounded-[24px] p-6 text-white shadow-lg shadow-black/15">
               <div className="flex items-center gap-2 mb-1">
                 <Star className="w-4 h-4 text-yellow-300" />
                 <h3 className="text-[14px] font-bold">Boost Your Profile</h3>
