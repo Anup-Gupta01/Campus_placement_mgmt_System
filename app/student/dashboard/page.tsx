@@ -197,7 +197,7 @@ export default function StudentDashboard() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-10">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="text-emerald-300 text-[13px] font-semibold mb-1">Welcome back 👋</p>
+              <p className="text-emerald-300 text-[13px] font-semibold mb-1">Welcome back </p>
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">{firstName}</h1>
               <p className="text-emerald-300 font-medium mt-2 text-[14px]">
                 You have <span className="text-white font-bold">{filteredOpps.length}</span> new placement opportunities waiting.
